@@ -407,9 +407,9 @@ pub fn warp_into<P>(
     let nn = |x, y| interpolate_nearest(image, x, y, default);
     let bl = |x, y| interpolate_bilinear(image, x, y, default);
     let bc = |x, y| interpolate_bicubic(image, x, y, default);
-    let wt = |x, y| projection.map_projective(x, y);
+    let wt = |x, y| projection.map_translation(x, y);
     let wa = |x, y| projection.map_affine(x, y);
-    let wp = |x, y| projection.map_translation(x, y);
+    let wp = |x, y| projection.map_projective(x, y);
     use Interpolation as I;
     use TransformationClass as TC;
 

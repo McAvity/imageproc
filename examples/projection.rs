@@ -3,7 +3,7 @@
 //! If running from the root directory of this crate you can test on the
 //! building image in /examples by running the following command line.
 //!
-//! `cargo run --release --example projection ./examples/empire-state-building.jpg ./tmp
+//! `cargo run --release --example projection ./examples/town-hall-in-poznan-poland.jpg ./tmp
 
 use image::{open, Rgb};
 use imageproc::geometric_transformations::{warp, Interpolation, Projection};
@@ -86,6 +86,13 @@ fn main() -> Result<()> {
     let scale = Projection::scale(2.0, 3.0);
     warp(&image, &scale, Interpolation::Bilinear, Rgb([255, 0, 0]))
         .save(output_dir.join("scaled.png"))?;
+
+    let transform = Projection::from_control_points(
+        [(31f32,252f32), (289f32,246f32), (12f32,421f32), (314f32,417f32), ],
+        [(12f32,246f32), (314f32,246f32), (12f32,421f32), (314f32,421f32), ],
+    ).unwrap();
+    warp(&image, &transform, Interpolation::Bilinear, Rgb([255, 0, 0]))
+        .save(output_dir.join("transformed.png"))?;
 
     Ok(())
 }
