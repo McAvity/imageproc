@@ -11,7 +11,7 @@ homepage = "https://github.com/image-rs/imageproc"
 exclude = ["examples/*.ttf"]
 
 [features]
-default = []
+default = ["display-window"]
 property-testing = [ "quickcheck" ]
 display-window = ["sdl2"]
 
